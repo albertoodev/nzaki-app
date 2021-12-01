@@ -1,9 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import '../controller/settings_controller.dart';
 import '../view/splash_screen.dart';
+import 'themes/themes.dart';
 
-void main() => runApp(const MyApp());
+void main() async{
+  await GetStorage.init();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -11,39 +17,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      //locale: Locale('ar'),
-      themeMode: ThemeMode.system,
-      theme: ThemeData(
-        primaryColor: const Color(0xff1c2541),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: Color(0xff1c2541),
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.white,
-          selectedIconTheme: IconThemeData(
-            size: 35,
-          )
-        ),
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xff1c2541),
-        ),
-      ),
-      darkTheme: ThemeData(
-        backgroundColor: const Color(0xff1c2541),
-        primaryColor: const Color(0xff1c2541),
-        scaffoldBackgroundColor: const Color(0xff1c2541),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xff0b132b),
-        ),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-            backgroundColor: Color(0xff0b132b),
-            selectedItemColor: Colors.white,
-            unselectedItemColor: Colors.white,
-            selectedIconTheme: IconThemeData(
-              size: 40,
-            )
-        ),
-      ),
+      locale: SettingsController().getLocale(),
+      themeMode:SettingsController().getThemeMode(),
+      theme:Themes().lightTheme,
+      darkTheme: Themes().darkTheme,
       home: const SplashScreen(),
     );
   }

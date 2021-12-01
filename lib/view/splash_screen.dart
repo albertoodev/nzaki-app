@@ -8,11 +8,11 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         image: DecorationImage(
           image: AssetImage(
-        (Get.isDarkMode)?'assets/images/darkBackground.png':'assets/images/lightBackground.png',
+        'assets/images/lightBackground.png',
           ),
           fit: BoxFit.cover,
         ),
