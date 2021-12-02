@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nzakiapplication/view/about.dart';
 import '../widgets/drawer.dart';
-import '../test.dart';
 import '../view/calculation_screen.dart';
-import '../view/settings_screen.dart';
 import '../config.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -21,11 +20,9 @@ class HomeScreen extends StatelessWidget {
           centerTitle: true,
           actions: [
             IconButton(
-              onPressed: () => Get.to(
-                const SettingsScreen(),
-              ),
+              onPressed: () => Get.to(()=>const About()),
               icon: const Icon(
-                Icons.settings,
+                Icons.info,
               ),
             ),
           ],
@@ -34,47 +31,47 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.all(15),
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          decoration: Config.backgroundDecoration,
+          decoration: backgroundDecoration,
           alignment: Alignment.center,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ...list.map(
-                  (element) => Column(
-                    children: [
-                      Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40),
-                          side: BorderSide(
-                            color: Get.theme.primaryColor,
+                ...Config().zakatTypes.map(
+                      (element) => Column(
+                        children: [
+                          Card(
+                            child: ListTile(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40),
+                              ),
+                              onTap: () => Get.to(
+                                () => CalculationScreen(
+                                  item: element,
+                                ),
+                              ),
+                              visualDensity: VisualDensity.standard,
+                              leading: Icon(
+                                element.icon,
+                                color: Get.theme.primaryColor,
+                              ),
+                              trailing: Icon(
+                                Icons.arrow_forward_ios,
+                                color: Get.theme.primaryColor,
+                              ),
+                              title: Text(
+                                element.name,
+                                textAlign: TextAlign.center,
+                                style: Get.textTheme.headline6,
+                              ),
+                            ),
                           ),
-                        ),
-                        child: ListTile(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40),
+                          const SizedBox(
+                            height: 30,
                           ),
-                          onTap: () => Get.to(
-                            () => const CalculationScreen(),
-                          ),
-                          visualDensity: VisualDensity.standard,
-                          leading: Icon(
-                            Icons.home,
-                            color: Get.theme.primaryColor,
-                          ),
-                          trailing: Icon(
-                            Icons.arrow_forward_ios,
-                            color: Get.theme.primaryColor,
-                          ),
-                          title: Text(element),
-                        ),
+                        ],
                       ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                    ],
-                  ),
-                )
+                    )
               ],
             ),
           ),

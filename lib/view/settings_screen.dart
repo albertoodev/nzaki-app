@@ -1,53 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../widgets/app_bar.dart';
+import '../config.dart';
 import '../controller/settings_controller.dart';
 
-import '../config.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  SettingsScreen({Key? key}) : super(key: key);
 
-  h6(String text) => Text(
-        text,
-        style: Get.theme.textTheme.headline6,
-      );
 
   @override
   Widget build(BuildContext context) {
     SettingsController globalController = Get.put(
       SettingsController(),
-      permanent: true,
     );
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('SETTINGS'),
-          centerTitle: true,
+        appBar: defaultAppBar(
+ label:'settings'.tr
         ),
         body: Container(
           alignment: Alignment.center,
           padding: const EdgeInsets.all(15),
           height: double.infinity,
           width: double.infinity,
-          decoration: Config.backgroundDecoration,
+          decoration: backgroundDecoration,
           child: SingleChildScrollView(
             child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-                side: BorderSide(
-                  color: Get.theme.primaryColor,
-                  width: 0.5,
-                ),
-              ),
-              color: Colors.white.withOpacity(0.9),
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    h6('LANGUAGE'),
+                    h6('language'.tr),
                     const Divider(
                       height: 15,
                       thickness: 2,
@@ -78,14 +65,14 @@ class SettingsScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    h6('THEME MODE'),
+                    h6('themeMode'.tr),
                     const Divider(
                       height: 15,
                       thickness: 2,
                     ),
                     Column(
                       children: [
-                        ...themes.map(
+                        ...Config().themes.map(
                           (theme) => ListTile(
                             leading: GetX<SettingsController>(
                               builder: (controller) => Radio<int>(
