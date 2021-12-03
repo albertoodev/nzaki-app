@@ -7,8 +7,9 @@ import '../widgets/widgets.dart';
 
 class CalculationScreen extends StatelessWidget {
   final int id;
-  final _formKey=GlobalKey<FormState>();
-   CalculationScreen({Key? key, required this.id}) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
+
+  CalculationScreen({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class CalculationScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Get.to(()=>About(title: zakatTypes[id].name.tr, content: 'aboutText1'));
+              Get.defaultDialog(title: zakatTypes[id].name.tr, content: Text('about$id'.tr));
             },
             icon: const Icon(
               Icons.info,
@@ -29,80 +30,110 @@ class CalculationScreen extends StatelessWidget {
         ],
       ),
       body: backgroundContainer(
-
         child: SingleChildScrollView(
           child: Column(
             children: [
               Card(
                 child: Container(
-                  alignment: Alignment.center,
                   padding:
                       const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      Text(
+                        'zakatCalculator'.tr,
+                        style: Get.theme.textTheme.headline6,
+                        textAlign: TextAlign.center,
+                      ),
+                      const Divider(
+                        height: 15,
+                        thickness: 2,
+                      ),
                       ListTile(
                         leading: Text("${'nisab'.tr} :"),
-                        title: Text(
-                          '${zakatTypes[id].nisab}',
-                          textAlign: TextAlign.center,
+                        title: GetX<CalculationController>(
+                          builder: (controller) => Text(
+                            '${(zakatTypes[id].nisab[controller.radioValue.value]).floor()}',
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                        trailing: Text(zakatTypes[id].unity!.tr),
+                        trailing: (id == 0)
+                            ? const SizedBox()
+                            : Text(zakatTypes[id].unity!.tr),
                       ),
                       ListTile(
                         leading: Text("${'value'.tr} :"),
                         title: Form(
                           key: _formKey,
                           child: TextFormField(
+                            cursorColor: Get.theme.primaryColor,
                             keyboardType: TextInputType.number,
                             textAlign: TextAlign.center,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Get.theme.primaryColor),
+                              ),
                               hintText: '0.0',
                             ),
-                            validator: (value){
-                              try{
-                                return zakatTypes[id].functions['validate']!(value,globalController.radioValue.value);
-                              } catch(e){
-                                print('mzl mahatitch kaml validate functions xD');
+                            validator: (value) {
+                              try {
+                                double input = double.parse(value!);
+                                if(id==0 && input == input.floor()){
+                                  return 'value must be a integer positif';
+                                }
+                                double nisab = zakatTypes[id]
+                                    .nisab[globalController.radioValue.value];
+                                if (input <= 0) {
+                                  return 'value can not be zero or negative ';
+                                }
+                                if (input < nisab) {
+                                  return 'value can note be less than ' +
+                                      nisab.toString();
+                                }
+                              } catch (_) {
+                                return 'enter number positive';
                               }
+                              ;
                             },
-                            onSaved: (value){
-                              try{
-                                globalController.getResult(input: double.parse(value!), itemId: id);
-                              } catch(e){
-                                print('mzl mahatitch kaml save functions xD');
-                              }
-
-                            },
+                            onSaved: (value) => globalController.getResult(
+                                input: double.parse(value!), itemId: id),
                           ),
                         ),
-                        trailing: Text(zakatTypes[id].unity!),
+                        trailing: (id == 0)
+                            ? const SizedBox()
+                            : Text(zakatTypes[id].unity!),
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      if(zakatTypes[id].list!=null)...zakatTypes[id].list!.map(
-                        (type) => ListTile(
-                          leading: GetX<CalculationController>(
-                            builder: (controller) => Radio<int>(
-                              activeColor: Get.theme.primaryColor,
-                              value: type['index'],
-                              groupValue: controller.radioValue.value,
-                              onChanged: (value) {
-                                globalController.changeCurrentRadioValue(value!);
-                              },
+                      if (zakatTypes[id].types != null)
+                        ...zakatTypes[id].types!.map(
+                              (type) => ListTile(
+                                leading: GetX<CalculationController>(
+                                  builder: (controller) => Radio<int>(
+                                    activeColor: Get.theme.primaryColor,
+                                    value: type['index'],
+                                    groupValue: controller.radioValue.value,
+                                    onChanged: (value) {
+                                      globalController
+                                          .changeCurrentRadioValue(value!);
+                                    },
+                                  ),
+                                ),
+                                onTap: () => globalController
+                                    .changeCurrentRadioValue(type['index']),
+                                title: Text(
+                                  "${type['value']}".tr,
+                                ),
+                              ),
                             ),
-                          ),
-                          onTap: ()=>globalController.changeCurrentRadioValue(type['index']),
-                          title: Text(type['value']),
-                        ),
-                      ),
                       const SizedBox(
                         height: 10,
                       ),
                       FloatingActionButton.extended(
                         onPressed: () {
-                          if(_formKey.currentState!.validate()){
+                          if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                           }
                         },
@@ -121,16 +152,24 @@ class CalculationScreen extends StatelessWidget {
                   alignment: Alignment.center,
                   padding:
                       const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                  child: ListTile(
-                    leading:Text(
-                        '${'result'.tr} :'
-                    ),
-                    title:GetX<CalculationController>(builder: (controller)=> Text(
-                      controller.result.value,
-                      style: Get.theme.textTheme.headline5,
-                      textAlign: TextAlign.center,
-                    )),
-                    trailing: Text(zakatTypes[id].unity!.tr),
+                  child: Column(
+                    children: [
+                      Text(
+                        'result'.tr,
+                        style: Get.theme.textTheme.headline6,
+                        textAlign: TextAlign.center,
+                      ),
+                      const Divider(
+                        height: 15,
+                        thickness: 2,
+                      ),
+                      GetX<CalculationController>(
+                          builder: (controller) => Text(
+                                controller.result.value,
+                                style: Get.theme.textTheme.headline5,
+                                textAlign: TextAlign.center,
+                              )),
+                    ],
                   ),
                 ),
               ),

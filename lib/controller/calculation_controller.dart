@@ -12,7 +12,7 @@ class CalculationController extends GetxController {
   }
 
   getResult({required double input, required int itemId}) {
-    result.value = zakatTypes[itemId].functions['result']!(
+    result.value = zakatTypes[itemId].function(
         input: input, radioValue: radioValue.value);
   }
 }

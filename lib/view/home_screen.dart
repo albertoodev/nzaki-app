@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../utils/data/global_data.dart';
 import '../view/about.dart';
@@ -105,7 +104,7 @@ class HomeScreen extends StatelessWidget {
                         ))),
                 ...drawerItem(
                     'ayatDrawer'.tr,
-                    FontAwesomeIcons.quran,
+                    Icons.menu_book,
                     () => Get.to(() => About(
                           title: 'ayatDrawer',
                           content: ayatText,

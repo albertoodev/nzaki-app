@@ -1,69 +1,89 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import '/models/zakat_type.dart';
 
 import 'calculations_functions.dart';
 
 final List<ZakatType> zakatTypes = [
-  //zakat on money
-  ZakatType(
-    id: 0,
-    name: 'name0',
-    icon: Icons.home,
-    unity: 'unity0',
-    about: 'about0',
-    nisab: 0,
-      functions: zakatFunctions[0]
-  ),
   //zakat on cattle
+  ZakatType(
+      id: 0,
+      name: 'name0',
+      icon: Icons.home,
+      about: 'about0',
+      //head
+      nisab: [
+        40,
+        30,
+        5,
+      ],
+      types: [
+        {'index': 0, 'value': 'type01'}, //ovins
+        {'index': 1, 'value': 'types02'},//bovins
+        {'index': 2, 'value': 'types03'}  //chameaux
+
+      ],
+      function: zakatFunctions[0]),
+  //zakat on farm produce
   ZakatType(
     id: 1,
     name: 'name1',
     icon: Icons.home,
+    unity: 'unity1',
+    //kg
     about: 'about1',
-    unity: 'unity',
-    nisab: 0,
-    list: [
-      {'index': 0, 'value': 'chameaux'},//chameaux
-      {'index': 1, 'value': 'bovins'},//bovins
-      {'index': 2, 'value': 'ovins'}//ovins
+    nisab: [
+      675,
+      675,
     ],
-      functions: zakatFunctions[1]
+    types: [
+      {'index': 0, 'value': 'type11'}, //naturelle
+      {'index': 1, 'value': 'type12'}, //artificielle
+    ],
+    function: zakatFunctions[1],
   ),
-  //zakat on gold
+  //zakat on gold and silver
   ZakatType(
-    id: 2,
-    name: 'name2',
-    icon: Icons.home,
-    unity: 'unity2',
-    about: 'about2',
-    nisab: 0,
-      functions: zakatFunctions[2]
-  ),
-  //zakat on silver
+      id: 2,
+      name: 'name2',
+      icon: Icons.home,
+      unity: 'unity2',
+      //g
+      about: 'about2',
+      nisab: [
+        595,
+        113,
+        97,
+        85,
+      ],
+      types: [
+        {'index': 0, 'value': 'type21'}, //silver
+        {'index': 1, 'value': 'type22'}, //18 carats
+        {'index': 2, 'value': 'type23'}, //21 carats
+        {'index': 3, 'value': 'type24'}, //24 carats
+      ],
+      function: zakatFunctions[2]),
+
+  //zakat on money
   ZakatType(
     id: 3,
     name: 'name3',
     icon: Icons.home,
     unity: 'unity3',
     about: 'about3',
-    nisab: 0,
-      functions: zakatFunctions[3]
-  ),
-  //zakat on farm produce
-  ZakatType(
-    id: 4,
-    name: 'name4',
-    icon: Icons.home,
-    unity: 'unity4',
-    about: 'about4'.tr,
-    nisab: 0,
-    list: [
-      {'index': 0, 'value': 'type1'},
-      {'index': 2, 'value': 'type2'},
-    ], functions: zakatFunctions[4],
+    nisab: [
+      705500,
+    ],
+    function: zakatFunctions[3],
   ),
 ];
+
+
+
+
+
+
+
+
 const List<Map<String, dynamic>> themes = [
   {
     'index': 0,
@@ -82,22 +102,24 @@ const List<Map<String, dynamic>> themes = [
   }
 ];
 
+
+
+
+
+
+
+
+
 const List languages = [
   {
     'value': 'en',
     'label': 'English',
   },
   {
-    'value': 'fr',
-    'label': 'Français',
-  },
-  {
     'value': 'ar',
     'label': 'عربي',
-  }
+  },
 ];
-
-
 
 const String ayatText = 'قوله تعالى\n' +
     '{كُلُّ نَفْسٍ بِمَا كَسَبَتْ رَهِينَةٌ، إِلاَّ أَصْحَابَ الْيَمِينِ، فِي جَنَّاتٍ يَتَسَاءَلُونَ، عَنْ الْمُجْرِمِينَ، مَا سَلَكَكُمْ فِي سَقَرَ، قَالُوا لَمْ نَكُ مِنَ الْمُصَلِّينَ، وَلَمْ نَكُ نُطْعِمُ الْمِسْكِينَ، وَكُنَّا نَخُوضُ مَعَ الْخَائِضِينَ، وَكُنَّا نُكَذِّبُ بِيَوْمِ الدِّينِ، حَتَّى أَتَانَا الْيَقِينُ}\n'
