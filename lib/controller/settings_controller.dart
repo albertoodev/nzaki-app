@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import '/utils/data/global_data.dart';
 
-import '../config.dart';
 
 class SettingsController extends GetxController {
   final GetStorage _getStorage = GetStorage();
-
-
   //Rx variables
   RxInt currentTheme = 2.obs;
   RxString language = 'en'.obs;
-
   //keys variables
   final String themeKey = 'theme';
   final String languageKey = 'language';
@@ -23,7 +20,7 @@ class SettingsController extends GetxController {
   }
 
   //theme mode functions
-  ThemeMode getThemeMode() => Config().themes[_getThemeValue()]['value'];
+  ThemeMode getThemeMode() => themes[_getThemeValue()]['value'];
 
   int _getThemeValue() {
     return _getStorage.read(themeKey) ?? 2;

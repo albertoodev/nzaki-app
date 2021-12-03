@@ -8,6 +8,7 @@ class ZakatType {
   final String? unity;
   final String about;
   List? list;
+  final Map<String, Function> functions;
 
   ZakatType({
     required this.id,
@@ -17,5 +18,6 @@ class ZakatType {
     this.list,
     required this.about,
     required this.nisab,
+    required this.functions,
   });
 }

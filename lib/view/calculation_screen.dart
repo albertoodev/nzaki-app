@@ -1,41 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nzakiapplication/controller/calculation_controller.dart';
-import 'package:nzakiapplication/models/zakat_type.dart';
-import '../config.dart';
+import '../controller/calculation_controller.dart';
+import '../utils/data/global_data.dart';
+import '../view/about.dart';
+import '../widgets/widgets.dart';
 
 class CalculationScreen extends StatelessWidget {
-  final ZakatType item;
+  final int id;
   final _formKey=GlobalKey<FormState>();
-   CalculationScreen({Key? key, required this.item}) : super(key: key);
+   CalculationScreen({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     CalculationController globalController = Get.put(CalculationController());
     return Scaffold(
       appBar: AppBar(
-        title: Text(item.name),
+        title: Text(zakatTypes[id].name.tr),
         centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {
-              Get.defaultDialog(
-                title: item.name,
-                middleText: 'about text',
-              );
+              Get.to(()=>About(title: zakatTypes[id].name.tr, content: 'aboutText1'));
             },
             icon: const Icon(
-              Icons.info_outlined,
+              Icons.info,
             ),
           ),
         ],
       ),
-      body: Container(
-        alignment: Alignment.center,
-        height: double.infinity,
-        width: double.infinity,
-        padding: const EdgeInsets.all(15),
-        decoration: backgroundDecoration,
+      body: backgroundContainer(
+
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -50,10 +44,10 @@ class CalculationScreen extends StatelessWidget {
                       ListTile(
                         leading: Text("${'nisab'.tr} :"),
                         title: Text(
-                          '${item.nisab}',
+                          '${zakatTypes[id].nisab}',
                           textAlign: TextAlign.center,
                         ),
-                        trailing: Text(item.unity!),
+                        trailing: Text(zakatTypes[id].unity!.tr),
                       ),
                       ListTile(
                         leading: Text("${'value'.tr} :"),
@@ -67,14 +61,14 @@ class CalculationScreen extends StatelessWidget {
                             ),
                             validator: (value){
                               try{
-                                calculationFunctions[item.id]['validate'](value,globalController.radioValue.value);
+                                return zakatTypes[id].functions['validate']!(value,globalController.radioValue.value);
                               } catch(e){
                                 print('mzl mahatitch kaml validate functions xD');
                               }
                             },
                             onSaved: (value){
                               try{
-                                globalController.getResult(input: double.parse(value!), itemId: item.id);
+                                globalController.getResult(input: double.parse(value!), itemId: id);
                               } catch(e){
                                 print('mzl mahatitch kaml save functions xD');
                               }
@@ -82,12 +76,12 @@ class CalculationScreen extends StatelessWidget {
                             },
                           ),
                         ),
-                        trailing: Text(item.unity!),
+                        trailing: Text(zakatTypes[id].unity!),
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      if(item.list!=null)...item.list!.map(
+                      if(zakatTypes[id].list!=null)...zakatTypes[id].list!.map(
                         (type) => ListTile(
                           leading: GetX<CalculationController>(
                             builder: (controller) => Radio<int>(
@@ -112,7 +106,7 @@ class CalculationScreen extends StatelessWidget {
                             _formKey.currentState!.save();
                           }
                         },
-                        label: const Text('check'),
+                        label: Text('check'.tr),
                         backgroundColor: Get.theme.primaryColor,
                       )
                     ],
@@ -128,13 +122,15 @@ class CalculationScreen extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                   child: ListTile(
-                    leading:const Text("result:"),
+                    leading:Text(
+                        '${'result'.tr} :'
+                    ),
                     title:GetX<CalculationController>(builder: (controller)=> Text(
                       controller.result.value,
                       style: Get.theme.textTheme.headline5,
                       textAlign: TextAlign.center,
                     )),
-                    trailing: Text(item.unity!),
+                    trailing: Text(zakatTypes[id].unity!.tr),
                   ),
                 ),
               ),

@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
-import 'package:nzakiapplication/languages/utils/ar.dart';
-import 'package:nzakiapplication/languages/utils/en.dart';
+import 'utils/ar.dart';
+import 'utils/en.dart';
+
 
 class Translation extends Translations{
   @override

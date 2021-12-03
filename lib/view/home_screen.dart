@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:nzakiapplication/view/about.dart';
-import '../widgets/drawer.dart';
+import '../utils/data/global_data.dart';
+import '../view/about.dart';
+import '../view/contact_us.dart';
+import '../view/settings_screen.dart';
+import '../widgets/widgets.dart';
 import '../view/calculation_screen.dart';
-import '../config.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -20,63 +23,108 @@ class HomeScreen extends StatelessWidget {
           centerTitle: true,
           actions: [
             IconButton(
-              onPressed: () => Get.to(()=>const About()),
+              onPressed: () => Get.to(() => About(
+                    title: 'aboutDrawer',
+                    content: 'aboutZakat',
+                  )),
               icon: const Icon(
                 Icons.info,
               ),
             ),
           ],
         ),
-        body: Container(
-          padding: const EdgeInsets.all(15),
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          decoration: backgroundDecoration,
-          alignment: Alignment.center,
+        body: backgroundContainer(
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ...Config().zakatTypes.map(
-                      (element) => Column(
-                        children: [
-                          Card(
-                            child: ListTile(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40),
-                              ),
-                              onTap: () => Get.to(
-                                () => CalculationScreen(
-                                  item: element,
-                                ),
-                              ),
-                              visualDensity: VisualDensity.standard,
-                              leading: Icon(
-                                element.icon,
-                                color: Get.theme.primaryColor,
-                              ),
-                              trailing: Icon(
-                                Icons.arrow_forward_ios,
-                                color: Get.theme.primaryColor,
-                              ),
-                              title: Text(
-                                element.name,
-                                textAlign: TextAlign.center,
-                                style: Get.textTheme.headline6,
-                              ),
+                ...zakatTypes.map(
+                  (element) => Column(
+                    children: [
+                      Card(
+                        child: ListTile(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          onTap: () => Get.to(
+                            () => CalculationScreen(
+                              id: element.id,
                             ),
                           ),
-                          const SizedBox(
-                            height: 30,
+                          visualDensity: VisualDensity.standard,
+                          leading: Icon(
+                            element.icon,
+                            color: Get.theme.primaryColor,
                           ),
-                        ],
+                          trailing: Icon(
+                            Icons.arrow_forward_ios,
+                            color: Get.theme.primaryColor,
+                          ),
+                          title: Text(
+                            element.name.tr,
+                            textAlign: TextAlign.center,
+                            style: Get.textTheme.headline6,
+                          ),
+                        ),
                       ),
-                    )
+                      const SizedBox(
+                        height: 30,
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
         ),
-        drawer: defaultDrawer(),
+        drawer: Drawer(
+          child: Container(
+            height: double.infinity,
+            width: Get.width,
+            color: Get.theme.primaryColor,
+            child: ListView(
+              children: [
+                Image.asset(
+                  'assets/images/logo.png',
+                  height: AppBar().preferredSize.height - 10,
+                ),
+                const Divider(
+                  color: Colors.white,
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                ...drawerItem('settings'.tr, Icons.settings,
+                    () => Get.to(() => const SettingsScreen())),
+                ...drawerItem(
+                    'aboutDrawer'.tr,
+                    Icons.info,
+                    () => Get.to(() => About(
+                          title: 'aboutDrawer',
+                          content: 'aboutZakat',
+                        ))),
+                ...drawerItem(
+                    'ayatDrawer'.tr,
+                    FontAwesomeIcons.quran,
+                    () => Get.to(() => About(
+                          title: 'ayatDrawer',
+                          content: ayatText,
+                          isArabic: true,
+                        ))),
+                ...drawerItem(
+                  'rate'.tr,
+                  Icons.star,
+                  () => Get.defaultDialog(
+                    title: 'Soon',
+                    middleText: 'coming soon ...',
+                  ),
+                ),
+                ...drawerItem('contactUs'.tr, Icons.phone,
+                    () => Get.to(() => const ContactUs())),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

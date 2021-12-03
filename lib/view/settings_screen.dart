@@ -1,31 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../widgets/app_bar.dart';
-import '../config.dart';
+import '../utils/data/global_data.dart';
+import '../widgets/widgets.dart';
 import '../controller/settings_controller.dart';
 
-
 class SettingsScreen extends StatelessWidget {
-  SettingsScreen({Key? key}) : super(key: key);
-
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    SettingsController globalController = Get.put(
-      SettingsController(),
-    );
-
+    SettingsController globalController = Get.find<SettingsController>();
     return SafeArea(
       child: Scaffold(
-        appBar: defaultAppBar(
- label:'settings'.tr
-        ),
-        body: Container(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.all(15),
-          height: double.infinity,
-          width: double.infinity,
-          decoration: backgroundDecoration,
+        appBar: defaultAppBar(label: 'settings'.tr),
+        body: backgroundContainer(
           child: SingleChildScrollView(
             child: Card(
               child: Container(
@@ -34,7 +22,10 @@ class SettingsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    h6('language'.tr),
+                    Text(
+                      'language'.tr,
+                      style: Get.theme.textTheme.headline6,
+                    ),
                     const Divider(
                       height: 15,
                       thickness: 2,
@@ -65,31 +56,30 @@ class SettingsScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    h6('themeMode'.tr),
+                    Text(
+                      'themeMode'.tr,
+                      style: Get.theme.textTheme.headline6,
+                    ),
                     const Divider(
                       height: 15,
                       thickness: 2,
                     ),
                     Column(
                       children: [
-                        ...Config().themes.map(
+                        ...themes.map(
                           (theme) => ListTile(
                             leading: GetX<SettingsController>(
                               builder: (controller) => Radio<int>(
                                 activeColor: Get.theme.primaryColor,
                                 value: theme['index'],
                                 groupValue: controller.currentTheme.value,
-                                onChanged: (value) {
-                                  globalController.changeCurrentTheme(
-                                      value!, theme['value']);
-                                },
+                                onChanged: (value) => globalController
+                                    .changeCurrentTheme(value!, theme['value']),
                               ),
                             ),
-                            onTap: () {
-                              globalController.changeCurrentTheme(
-                                  theme['index'], theme['value']);
-                            },
-                            title: Text(theme['label']),
+                            onTap: () => globalController.changeCurrentTheme(
+                                theme['index'], theme['value']),
+                            title: Text('${theme['label']}'.tr),
                           ),
                         ),
                       ],

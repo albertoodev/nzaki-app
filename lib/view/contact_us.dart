@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import 'package:nzakiapplication/config.dart';
-import 'package:nzakiapplication/widgets/app_bar.dart';
+import '../widgets/widgets.dart';
 
 class ContactUs extends StatelessWidget {
   const ContactUs({Key? key}) : super(key: key);
@@ -14,12 +13,7 @@ class ContactUs extends StatelessWidget {
         appBar: defaultAppBar(
           label: 'contactUs'.tr
         ),
-        body: Container(
-          padding: const EdgeInsets.all(15),
-          height: double.infinity,
-          width: double.infinity,
-          alignment: Alignment.center,
-          decoration: backgroundDecoration,
+        body: backgroundContainer(
           child: SingleChildScrollView(
             child: Card(
               child: Container(
@@ -28,7 +22,7 @@ class ContactUs extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    h6('contactUs'.tr),
+                    Text('contactUs'.tr,style: Get.theme.textTheme.headline6,),
                     const Divider(
                       height: 15,
                       thickness: 2,

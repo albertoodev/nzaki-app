@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-ThemeData lightTheme = ThemeData.light().copyWith(
+final ThemeData lightTheme = ThemeData.light().copyWith(
   cardTheme: CardTheme(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(40),
@@ -17,7 +17,7 @@ ThemeData lightTheme = ThemeData.light().copyWith(
   ),
 
 );
-ThemeData darkTheme = ThemeData.light().copyWith(
+final ThemeData darkTheme = ThemeData.light().copyWith(
   cardTheme: CardTheme(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(40),
