@@ -6,6 +6,7 @@ final List<Function> zakatFunctions = [
     required int radioValue,
     required double input,
   }) {
+  int intInput = input.floor();
     switch (radioValue) {
       case 0:
         if (input <= 120) {
@@ -18,7 +19,6 @@ final List<Function> zakatFunctions = [
           return '3 C';
         }
         return '${input ~/100} C';
-        break;
       case 1:
         if (input <= 39) {
           return '1 T';
@@ -44,8 +44,17 @@ final List<Function> zakatFunctions = [
         if (input <= 119) {
           return '3 Mo ${'or'.tr} 4 T';
         }
-        //regle 2
-        break;
+        int mo=0,t=0;
+        mo=intInput ~/40;
+        int num1 = intInput%40;
+        if(num1 != 0){
+          int num2=(30-num1)~/10;
+          if(num2<mo){
+            t=1+num2;
+            mo-=num2;
+          }
+        }
+        return '$mo Mo  $t T';
       case 2:
         if (input <= 24) {
           return '${(input ~/ 5)} C';
@@ -65,11 +74,22 @@ final List<Function> zakatFunctions = [
         if (input <= 90) {
           return '2 L';
         }
-        if (input <= 90) {
+        if (input <= 120) {
           return '2 H';
         }
-        //regle 2
-        break;
+        int h=0,l=0;
+        h= intInput ~/50;
+        print('h== $h  lesssgoooo');
+        int num1 = intInput%50;
+        if(num1 != 0){
+          int num2=(40-num1)~/10;
+          print(num2);
+          if(num2<h){
+            l=1+num2;
+            h-=num2;
+          }
+        }
+        return '$h H  $l L';
     }
   },
   // zakat on Farm Produce

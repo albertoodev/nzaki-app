@@ -54,6 +54,7 @@ class HomeScreen extends StatelessWidget {
                           leading: Icon(
                             element.icon,
                             color: Get.theme.primaryColor,
+                            size: (element.id == 1) ? 28 : 23,
                           ),
                           trailing: Icon(
                             Icons.arrow_forward_ios,
@@ -62,7 +63,9 @@ class HomeScreen extends StatelessWidget {
                           title: Text(
                             element.name.tr,
                             textAlign: TextAlign.center,
-                            style: Get.textTheme.headline6,
+                            style: Get.textTheme.headline6!.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Get.theme.primaryColor),
                           ),
                         ),
                       ),

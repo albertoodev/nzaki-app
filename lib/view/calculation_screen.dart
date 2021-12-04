@@ -79,7 +79,7 @@ class CalculationScreen extends StatelessWidget {
                             validator: (value) {
                               try {
                                 double input = double.parse(value!);
-                                if(id==0 && input == input.floor()){
+                                if(id==0 && input != input.floor()){
                                   return 'value must be a integer positif';
                                 }
                                 double nisab = zakatTypes[id]
@@ -102,7 +102,7 @@ class CalculationScreen extends StatelessWidget {
                         ),
                         trailing: (id == 0)
                             ? const SizedBox()
-                            : Text(zakatTypes[id].unity!),
+                            : Text((zakatTypes[id].unity!).tr),
                       ),
                       const SizedBox(
                         height: 10,

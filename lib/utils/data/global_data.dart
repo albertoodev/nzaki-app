@@ -2,32 +2,33 @@ import 'package:flutter/material.dart';
 import '/models/zakat_type.dart';
 
 import 'calculations_functions.dart';
+import 'zakat_icons.dart';
 
 final List<ZakatType> zakatTypes = [
   //zakat on cattle
   ZakatType(
-      id: 0,
-      name: 'name0',
-      icon: Icons.home,
-      about: 'about0',
-      //head
-      nisab: [
-        40,
-        30,
-        5,
-      ],
-      types: [
-        {'index': 0, 'value': 'type01'}, //ovins
-        {'index': 1, 'value': 'types02'},//bovins
-        {'index': 2, 'value': 'types03'}  //chameaux
-
-      ],
-      function: zakatFunctions[0]),
+    id: 0,
+    name: 'name0',
+    icon: ZakatIcons.camel,
+    about: 'about0',
+    //head
+    nisab: [
+      40,
+      30,
+      5,
+    ],
+    types: [
+      {'index': 0, 'value': 'type00'}, //ovins
+      {'index': 1, 'value': 'type01'}, //bovins
+      {'index': 2, 'value': 'type02'} //chameaux
+    ],
+    function: zakatFunctions[0],
+  ),
   //zakat on farm produce
   ZakatType(
     id: 1,
     name: 'name1',
-    icon: Icons.home,
+    icon: ZakatIcons.wheat,
     unity: 'unity1',
     //kg
     about: 'about1',
@@ -36,38 +37,39 @@ final List<ZakatType> zakatTypes = [
       675,
     ],
     types: [
-      {'index': 0, 'value': 'type11'}, //naturelle
-      {'index': 1, 'value': 'type12'}, //artificielle
+      {'index': 0, 'value': 'type10'}, //naturelle
+      {'index': 1, 'value': 'type11'}, //artificielle
     ],
     function: zakatFunctions[1],
   ),
   //zakat on gold and silver
   ZakatType(
-      id: 2,
-      name: 'name2',
-      icon: Icons.home,
-      unity: 'unity2',
-      //g
-      about: 'about2',
-      nisab: [
-        595,
-        113,
-        97,
-        85,
-      ],
-      types: [
-        {'index': 0, 'value': 'type21'}, //silver
-        {'index': 1, 'value': 'type22'}, //18 carats
-        {'index': 2, 'value': 'type23'}, //21 carats
-        {'index': 3, 'value': 'type24'}, //24 carats
-      ],
-      function: zakatFunctions[2]),
+    id: 2,
+    name: 'name2',
+    icon: ZakatIcons.coins,
+    unity: 'unity2',
+    //g
+    about: 'about2',
+    nisab: [
+      595,
+      113,
+      97,
+      85,
+    ],
+    types: [
+      {'index': 0, 'value': 'type20'}, //silver
+      {'index': 1, 'value': 'type21'}, //18 carats
+      {'index': 2, 'value': 'type22'}, //21 carats
+      {'index': 3, 'value': 'type23'}, //24 carats
+    ],
+    function: zakatFunctions[2],
+  ),
 
   //zakat on money
   ZakatType(
     id: 3,
     name: 'name3',
-    icon: Icons.home,
+    icon: ZakatIcons.money,
     unity: 'unity3',
     about: 'about3',
     nisab: [
@@ -76,13 +78,6 @@ final List<ZakatType> zakatTypes = [
     function: zakatFunctions[3],
   ),
 ];
-
-
-
-
-
-
-
 
 const List<Map<String, dynamic>> themes = [
   {
@@ -101,14 +96,6 @@ const List<Map<String, dynamic>> themes = [
     'label': 'systemMode',
   }
 ];
-
-
-
-
-
-
-
-
 
 const List languages = [
   {

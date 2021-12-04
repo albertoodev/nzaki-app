@@ -15,10 +15,11 @@ final ThemeData lightTheme = ThemeData.light().copyWith(
   appBarTheme: const AppBarTheme(
     backgroundColor: Color(0xff1c2541),
   ),
+  colorScheme: ColorScheme.fromSwatch().copyWith(secondary:const Color(0xff0b132b)),
 
 );
 final ThemeData darkTheme = ThemeData.light().copyWith(
-  cardTheme: CardTheme(
+cardTheme: CardTheme(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(40),
       side: const BorderSide(
@@ -32,5 +33,5 @@ final ThemeData darkTheme = ThemeData.light().copyWith(
   scaffoldBackgroundColor: const Color(0xff1c2541),
   appBarTheme: const AppBarTheme(
     backgroundColor: Color(0xff0b132b),
-  ),
+  ), colorScheme: ColorScheme.fromSwatch().copyWith(secondary:Colors.white.withOpacity(0.8)),
 );
