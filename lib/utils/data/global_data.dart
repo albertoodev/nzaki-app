@@ -8,9 +8,7 @@ final List<ZakatType> zakatTypes = [
   //zakat on cattle
   ZakatType(
     id: 0,
-    name: 'name0',
     icon: ZakatIcons.camel,
-    about: 'about0',
     //head
     nisab: [
       40,
@@ -27,11 +25,7 @@ final List<ZakatType> zakatTypes = [
   //zakat on farm produce
   ZakatType(
     id: 1,
-    name: 'name1',
     icon: ZakatIcons.wheat,
-    unity: 'unity1',
-    //kg
-    about: 'about1',
     nisab: [
       675,
       675,
@@ -45,11 +39,8 @@ final List<ZakatType> zakatTypes = [
   //zakat on gold and silver
   ZakatType(
     id: 2,
-    name: 'name2',
     icon: ZakatIcons.coins,
-    unity: 'unity2',
     //g
-    about: 'about2',
     nisab: [
       595,
       113,
@@ -68,12 +59,11 @@ final List<ZakatType> zakatTypes = [
   //zakat on money
   ZakatType(
     id: 3,
-    name: 'name3',
-    icon: ZakatIcons.money,
-    unity: 'unity3',
-    about: 'about3',
+    icon: Icons.monetization_on,
     nisab: [
       705500,
+      5079.93,
+      4476.92,
     ],
     function: zakatFunctions[3],
   ),
@@ -123,3 +113,13 @@ const String ayatText = 'قوله تعالى\n' +
     '\n\n قوله تعالى\n' +
     '{وَهُوَ الَّذِي أَنشَأَ جَنَّاتٍ مَعْرُ‌وشَاتٍ وَغَيْرَ‌ مَعْرُ‌وشَاتٍ وَالنَّخْلَ وَالزَّرْ‌عَ مُخْتَلِفًا أُكُلُهُ وَالزَّيْتُونَ وَالرُّ‌مَّانَ مُتَشَابِهًا وَغَيْرَ‌ مُتَشَابِهٍ كُلُوا مِن ثَمَرِ‌ه إِذَا أَثْمَرَ‌ وَآتُوا حَقَّهُ يَوْمَ حَصَادِهِ وَلَا تُسْرِ‌فُوا إِنَّهُ لَا يُحِبُّ الْمُسْرِ‌فِينَ}\n'
         '[الأنعام: 141]';
+
+
+
+final List<int> dropDownItems=[1,2,3];
+
+final cattleIcons=[
+  ZakatIcons.sheep,
+  ZakatIcons.cow,
+  ZakatIcons.camel
+];

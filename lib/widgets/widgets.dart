@@ -6,11 +6,11 @@ defaultAppBar({required String label})=>AppBar(
   centerTitle: true,
 );
 
-backgroundContainer({required Widget child})=>Container(
-  padding: const EdgeInsets.all(15),
+backgroundContainer({required Widget child,EdgeInsetsGeometry padding=const EdgeInsets.all(15),Alignment alignment=Alignment.center})=>Container(
+  padding: padding,
   height: double.infinity,
   width: double.infinity,
-  alignment: Alignment.center,
+  alignment:alignment,
   decoration: const BoxDecoration(
     image: DecorationImage(
       image: AssetImage(
@@ -33,7 +33,7 @@ drawerItem(String text,IconData icon,VoidCallback onTap)=>[
       text,
       style: const TextStyle(
         color: Colors.white,
-        fontSize: 15,
+        fontSize: 18,
         fontWeight: FontWeight.bold,
       ),
     ),

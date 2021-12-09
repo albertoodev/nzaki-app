@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-final ThemeData lightTheme = ThemeData.light().copyWith(
+final ThemeData lightTheme = ThemeData(
+  fontFamily: 'ElMessiri',
   cardTheme: CardTheme(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(40),
@@ -15,11 +16,12 @@ final ThemeData lightTheme = ThemeData.light().copyWith(
   appBarTheme: const AppBarTheme(
     backgroundColor: Color(0xff1c2541),
   ),
-  colorScheme: ColorScheme.fromSwatch().copyWith(secondary:const Color(0xff0b132b)),
-
+  colorScheme:
+      ColorScheme.fromSwatch().copyWith(secondary: const Color(0xff1c2541)),
 );
-final ThemeData darkTheme = ThemeData.light().copyWith(
-cardTheme: CardTheme(
+final ThemeData darkTheme = ThemeData(
+  fontFamily: 'ElMessiri',
+  cardTheme: CardTheme(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(40),
       side: const BorderSide(
@@ -33,5 +35,7 @@ cardTheme: CardTheme(
   scaffoldBackgroundColor: const Color(0xff1c2541),
   appBarTheme: const AppBarTheme(
     backgroundColor: Color(0xff0b132b),
-  ), colorScheme: ColorScheme.fromSwatch().copyWith(secondary:Colors.white.withOpacity(0.8)),
+  ),
+  colorScheme: ColorScheme.fromSwatch()
+      .copyWith(secondary: Colors.white.withOpacity(0.8)),
 );

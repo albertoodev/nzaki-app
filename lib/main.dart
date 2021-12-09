@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'view/start_screen.dart';
 import 'utils/bindings/global_binding.dart';
 import 'controller/settings_controller.dart';
-import 'view/splash_screen.dart';
 import 'themes/themes.dart';
 import 'utils/languages/translation.dart';
 
@@ -19,6 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      title: 'Nzaki',
       locale: SettingsController().getLocale(),
       themeMode:SettingsController().getThemeMode(),
       theme:lightTheme,
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       translations: Translation(),
       fallbackLocale: const Locale('en'),
       initialBinding: GlobalBinding(),
-      home:const SplashScreen(),
+      home:const StartScreen(),
     );
   }
 }

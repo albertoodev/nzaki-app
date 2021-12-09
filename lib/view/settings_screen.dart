@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../utils/data/global_data.dart';
-import '../widgets/widgets.dart';
-import '../controller/settings_controller.dart';
+import '/utils/data/global_data.dart';
+import '/widgets/widgets.dart';
+import '/controller/settings_controller.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -40,13 +40,13 @@ class SettingsScreen extends StatelessWidget {
                                 value: languageItem['value'],
                                 groupValue: controller.language.value,
                                 onChanged: (value) {
-                                  globalController.changeLanguage(value!);
+                                  globalController.changeLanguage(value:value!);
                                 },
                               ),
                             ),
                             onTap: () {
                               globalController
-                                  .changeLanguage(languageItem['value']);
+                                  .changeLanguage(value:languageItem['value']);
                             },
                             title: Text(languageItem['label']),
                           ),

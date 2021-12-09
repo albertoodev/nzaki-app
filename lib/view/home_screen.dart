@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../utils/data/global_data.dart';
-import '../view/about.dart';
-import '../view/contact_us.dart';
-import '../view/settings_screen.dart';
-import '../widgets/widgets.dart';
-import '../view/calculation_screen.dart';
+import '/utils/data/global_data.dart';
+import '/view/about.dart';
+import '/view/contact_us.dart';
+import '/view/settings_screen.dart';
+import '/widgets/widgets.dart';
+import '/view/calculation_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -22,10 +22,13 @@ class HomeScreen extends StatelessWidget {
           centerTitle: true,
           actions: [
             IconButton(
-              onPressed: () => Get.to(() => About(
-                    title: 'aboutDrawer',
-                    content: 'aboutZakat',
-                  )),
+              onPressed: () => Get.to(
+                () => About(
+                  title: 'aboutDrawer',
+                  content: 'aboutZakat',
+                ),
+                transition: Transition.topLevel,
+              ),
               icon: const Icon(
                 Icons.info,
               ),
@@ -49,6 +52,8 @@ class HomeScreen extends StatelessWidget {
                             () => CalculationScreen(
                               id: element.id,
                             ),
+                            transition: Transition.rightToLeftWithFade,
+                            curve: Curves.easeInOutQuint,
                           ),
                           visualDensity: VisualDensity.standard,
                           leading: Icon(
@@ -61,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                             color: Get.theme.primaryColor,
                           ),
                           title: Text(
-                            element.name.tr,
+                            'name${element.id}'.tr,
                             textAlign: TextAlign.center,
                             style: Get.textTheme.headline6!.copyWith(
                                 fontWeight: FontWeight.bold,
@@ -96,33 +101,48 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                ...drawerItem('settings'.tr, Icons.settings,
-                    () => Get.to(() => const SettingsScreen())),
                 ...drawerItem(
-                    'aboutDrawer'.tr,
-                    Icons.info,
-                    () => Get.to(() => About(
-                          title: 'aboutDrawer',
-                          content: 'aboutZakat',
-                        ))),
+                    'settings'.tr,
+                    Icons.settings,
+                    () => Get.to(
+                          () => const SettingsScreen(),
+                          transition: Transition.topLevel,
+                        )),
                 ...drawerItem(
                     'ayatDrawer'.tr,
                     Icons.menu_book,
-                    () => Get.to(() => About(
-                          title: 'ayatDrawer',
-                          content: ayatText,
-                          isArabic: true,
-                        ))),
+                    () => Get.to(
+                          () => About(
+                            title: 'ayatDrawer',
+                            content: ayatText,
+                            isArabic: true,
+                          ),
+                          transition: Transition.topLevel,
+                        )),
+                ...drawerItem(
+                    'aboutDrawer'.tr,
+                    Icons.info,
+                    () => Get.to(
+                          () => About(
+                            title: 'aboutDrawer',
+                            content: 'aboutZakat',
+                          ),
+                          transition: Transition.topLevel,
+                        )),
                 ...drawerItem(
                   'rate'.tr,
                   Icons.star,
                   () => Get.defaultDialog(
-                    title: 'Soon',
-                    middleText: 'coming soon ...',
+                    title: 'rate'.tr,
+                    middleText: 'coming'.tr,
                   ),
                 ),
-                ...drawerItem('contactUs'.tr, Icons.phone,
-                    () => Get.to(() => const ContactUs())),
+                ...drawerItem(
+                    'contactUs'.tr,
+                    Icons.phone,
+                    () => Get.to(
+                          () => const ContactUs(),
+                          transition: Transition.topLevel,)),
               ],
             ),
           ),
