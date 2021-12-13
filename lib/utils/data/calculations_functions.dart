@@ -40,7 +40,7 @@ final List<Function> zakatFunctions = [
           return '3 '+'';
         }
         if (input <= 119) {
-          return '1 ${'unity01'.tr}  2 ${'result'.tr}';
+          return '1 ${'unity01'.tr}  2 ${'result11'.tr}';
         }
         if (input <= 119) {
           return '3 ${'unity01'.tr} ${'or'.tr} 4 ${'result'.tr}';

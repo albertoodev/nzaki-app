@@ -22,7 +22,6 @@ class About extends StatelessWidget {
         body: backgroundContainer(
           child: Card(
               child: Container(
-
                 width: double.infinity,
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),

@@ -13,14 +13,14 @@ class StartScreen extends StatelessWidget {
     bool isBoarding = settingsController.isOnBoarding;
     if (isBoarding) {
       Timer(
-          const Duration(seconds: 2),
-          () => Get.off(
-                () => const HomeScreen(),
-                transition: Transition.fadeIn,
-                duration: const Duration(seconds: 1),
-              ));
+        const Duration(seconds: 2),
+        () => Get.off(
+          () => const HomeScreen(),
+          transition: Transition.fadeIn,
+          duration: const Duration(seconds: 1),
+        ),
+      );
     }
-
     return SafeArea(
       child: Scaffold(
         body: Container(

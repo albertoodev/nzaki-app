@@ -9,5 +9,4 @@ class Translation extends Translations{
     'en':en,
     'ar':ar,
   };
-
 }
