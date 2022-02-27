@@ -1,60 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:nzakiapplication/view/start_screen.dart';
 import '/utils/data/global_data.dart';
 
 class SettingsController extends GetxController {
-  bool isOnBoarding = false;
-  final GetStorage _getStorage = GetStorage();
+  static final GetStorage _getStorage = GetStorage();
 
   //Rx variables
-  RxInt currentTheme = 2.obs;
-  RxString language = 'en'.obs;
+  late RxInt currentTheme;
+  late RxString language;
 
   //keys variables
-  final String themeKey = 'theme';
-  final String languageKey = 'language';
-  final String isOnBoardingKey='onBoarding';
+  static const String _themeKey = 'theme';
+  static const String _languageKey = 'language';
+  static const String _isOnBoardingKey = 'boarding';
+
   //constrictor
   SettingsController() {
-    currentTheme.value = _getStorage.read(themeKey) ?? 2;
-    language.value = _getStorage.read(languageKey) ?? 'en';
-    isOnBoarding = _getStorage.read(isOnBoardingKey) ?? false;
+    currentTheme = RxInt(_getStorage.read(_themeKey) ?? 2);
+    language = RxString(_getStorage.read(_languageKey) ?? 'ar');
+    isOnBoarding = _getStorage.read(_isOnBoardingKey) ?? false;
   }
 
   //theme mode functions
-  ThemeMode getThemeMode() => themes[_getThemeValue()]['value'];
+  /// get initial [ThemeMode] from local storage [GetStorage]
+  static ThemeMode getThemeMode() => themes[_getThemeValue()]['value'];
 
-  int _getThemeValue() {
-    return _getStorage.read(themeKey) ?? 2;
+  /// get [ThemeMode] value from local storage [GetStorage]
+  static int _getThemeValue() {
+    return _getStorage.read(_themeKey) ?? 2;
   }
 
+  /// change [currentTheme] and write it in the local storage [GetStorage]
   changeCurrentTheme(int value, ThemeMode themeMode) {
     Get.changeThemeMode(themeMode);
     currentTheme.value = value;
-    _getStorage.write(themeKey, value);
+    _getStorage.write(_themeKey, value);
   }
 
   //language functions
+  /// get initial [Locale] from local storage
+  static Locale getLocale() => Locale(_getLanguageValue());
 
-  Locale getLocale() => Locale(_getLanguageValue());
+  /// get [Locale] value from local storage [GetStorage]
+  static String _getLanguageValue() => _getStorage.read(_languageKey) ?? 'ar';
 
-  String _getLanguageValue() => _getStorage.read(languageKey) ?? 'ar';
-
-  changeLanguage({
-    required String value,
-  }) {
+  /// change [language] and write it in the local storage [GetStorage]
+  changeLanguage({required String value}) {
     language.value = value;
     Get.updateLocale(Locale(value));
-    _getStorage.write(languageKey, value);
+    _getStorage.write(_languageKey, value);
   }
-  onBoardingDone(){
-    isOnBoarding=true;
-    _getStorage.write(isOnBoardingKey,isOnBoarding);
-  }
+
+  /// change [language] from [StartScreen] and write it in the local storage [GetStorage]
   changeLanguageFromOnBoarding() {
     language.value = language.value == 'en' ? 'ar' : 'en';
     Get.updateLocale(Locale(language.value));
-    _getStorage.write(languageKey, language.value);
+    _getStorage.write(_languageKey, language.value);
+  }
+
+  // onBoarding [StartScreen]
+  late bool isOnBoarding;
+  /// set [isOnBoarding] value to [true] and write it in the local storage [GetStorage]
+  onBoardingDone() {
+    isOnBoarding = true;
+    _getStorage.write(_isOnBoardingKey, isOnBoarding);
   }
 }

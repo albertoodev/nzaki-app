@@ -5,15 +5,15 @@ import '/widgets/widgets.dart';
 import '/controller/settings_controller.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  SettingsScreen({Key? key}) : super(key: key);
+  final SettingsController _globalController = Get.find<SettingsController>();
 
   @override
   Widget build(BuildContext context) {
-    SettingsController globalController = Get.find<SettingsController>();
     return SafeArea(
       child: Scaffold(
-        appBar: defaultAppBar(label: 'settings'.tr),
-        body: backgroundContainer(
+        appBar: DefaultAppBar(label: 'settings'.tr),
+        body: BackgroundContainer(
           child: SingleChildScrollView(
             child: Card(
               child: Container(
@@ -31,27 +31,7 @@ class SettingsScreen extends StatelessWidget {
                       thickness: 2,
                     ),
                     Column(
-                      children: [
-                        ...languages.map(
-                          (languageItem) => ListTile(
-                            leading: GetX<SettingsController>(
-                              builder: (controller) => Radio<String>(
-                                activeColor: Get.theme.primaryColor,
-                                value: languageItem['value'],
-                                groupValue: controller.language.value,
-                                onChanged: (value) {
-                                  globalController.changeLanguage(value:value!);
-                                },
-                              ),
-                            ),
-                            onTap: () {
-                              globalController
-                                  .changeLanguage(value:languageItem['value']);
-                            },
-                            title: Text(languageItem['label']),
-                          ),
-                        ),
-                      ],
+                      children: languages.map(_getLanguageItem).toList(),
                     ),
                     const SizedBox(
                       height: 15,
@@ -65,24 +45,11 @@ class SettingsScreen extends StatelessWidget {
                       thickness: 2,
                     ),
                     Column(
-                      children: [
-                        ...themes.map(
-                          (theme) => ListTile(
-                            leading: GetX<SettingsController>(
-                              builder: (controller) => Radio<int>(
-                                activeColor: Get.theme.primaryColor,
-                                value: theme['index'],
-                                groupValue: controller.currentTheme.value,
-                                onChanged: (value) => globalController
-                                    .changeCurrentTheme(value!, theme['value']),
-                              ),
-                            ),
-                            onTap: () => globalController.changeCurrentTheme(
-                                theme['index'], theme['value']),
-                            title: Text('${theme['label']}'.tr),
-                          ),
-                        ),
-                      ],
+                      children: themes
+                          .map(
+                            _getThemeItem,
+                          )
+                          .toList(),
                     ),
                   ],
                 ),
@@ -93,4 +60,27 @@ class SettingsScreen extends StatelessWidget {
       ),
     );
   }
+
+  /// get [ListTile] of language item
+  Widget _getLanguageItem(languageItem) => GetX<SettingsController>(
+        builder: (controller) => RadioListTile<String>(
+          value: languageItem['value'],
+          groupValue: controller.language.value,
+          onChanged: (value) => _globalController.changeLanguage(value: value!),
+          activeColor: Get.theme.primaryColor,
+          title: Text(languageItem['label']),
+        ),
+      );
+
+  /// get [ListTile] of theme item
+  Widget _getThemeItem(theme) => GetX<SettingsController>(
+        builder: (controller) => RadioListTile<int>(
+          value: theme['index'],
+          groupValue: controller.currentTheme.value,
+          onChanged: (value) =>
+              _globalController.changeCurrentTheme(value!, theme['value']),
+          activeColor: Get.theme.primaryColor,
+          title: Text('${theme['label']}'.tr),
+        ),
+      );
 }

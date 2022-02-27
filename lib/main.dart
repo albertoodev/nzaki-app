@@ -8,6 +8,7 @@ import 'themes/themes.dart';
 import 'utils/languages/translation.dart';
 
 void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   runApp(const MyApp());
 }
@@ -19,8 +20,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Nzaki',
-      locale: SettingsController().getLocale(),
-      themeMode:SettingsController().getThemeMode(),
+      locale: SettingsController.getLocale(),
+      themeMode:SettingsController.getThemeMode(),
       theme:lightTheme,
       darkTheme:darkTheme,
       translations: Translation(),

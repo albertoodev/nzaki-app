@@ -6,40 +6,45 @@ import '/widgets/widgets.dart';
 class About extends StatelessWidget {
   final String title;
   final String content;
-  bool isArabic;
+  final bool isArabic;
 
-  About({Key? key,
+  const About({
+    Key? key,
     required this.title,
     required this.content,
-    this.isArabic = false})
-      : super(key: key);
+    this.isArabic = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    TextDirection? _textDirection;
+    if (isArabic) {
+      _textDirection = TextDirection.rtl;
+    }
     return SafeArea(
       child: Scaffold(
-        appBar: defaultAppBar(label: title.tr),
-        body: backgroundContainer(
+        appBar: DefaultAppBar(label: title.tr),
+        body: BackgroundContainer(
           child: Card(
+            clipBehavior: Clip.hardEdge,
+            child: SingleChildScrollView(
               child: Container(
-                width: double.infinity,
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
-                child: SingleChildScrollView(
-                   child: Text(
-                      content.tr,
-                      style: const TextStyle(
-                        fontSize: 18,
-                      ),
-                      textAlign: TextAlign.center,
-                      textDirection: (isArabic) ? TextDirection.rtl : TextDirection
-                          .ltr,
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                  child: Text(
+                    content.tr,
+                    style: const TextStyle(
+                      fontSize: 18,
                     ),
-              )
-
+                    textAlign: TextAlign.center,
+                    textDirection: _textDirection,
+                  )),
+            ),
           ),
         ),
       ),
-    ),);
+    );
   }
 }

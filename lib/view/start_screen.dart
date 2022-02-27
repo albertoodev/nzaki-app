@@ -9,13 +9,13 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SettingsController settingsController = Get.find<SettingsController>();
+    final SettingsController settingsController = Get.find<SettingsController>();
     bool isBoarding = settingsController.isOnBoarding;
     if (isBoarding) {
       Timer(
         const Duration(seconds: 2),
         () => Get.off(
-          () => const HomeScreen(),
+          const HomeScreen(),
           transition: Transition.fadeIn,
           duration: const Duration(seconds: 1),
         ),
@@ -42,81 +42,8 @@ class StartScreen extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset(
-                    'assets/images/icon.png',
-                    width: 160,
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  SizedBox(
-                    height: 70,
-                    child: Text(
-                      'onBoardingTitle'.tr,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Get.theme.colorScheme.secondary,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  (!isBoarding)
-                      ? Column(
-                          children: [
-                            const SizedBox(
-                              height: 200,
-                            ),
-                            MaterialButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40),
-                              ),
-                              color: Get.theme.colorScheme.secondary,
-                              onPressed: () {
-                                settingsController.onBoardingDone();
-                                Get.off(
-                                  () => const HomeScreen(),
-                                  transition: Transition.fade,
-                                  duration: const Duration(seconds: 1),
-                                );
-                              },
-                              child: Container(
-                                width: 120,
-                                padding: const EdgeInsets.all(15),
-                                child: Text(
-                                  'start'.tr,
-                                  style: Get.textTheme.headline6!.copyWith(
-                                    color: Get.theme.scaffoldBackgroundColor,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ),
-                            MaterialButton(
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40),
-                              ),
-                              color: Get.theme.scaffoldBackgroundColor
-                                  .withOpacity(0.8),
-                              child: Text(
-                                '!language'.tr,
-                                style: Get.textTheme.headline6!.copyWith(
-                                  color: Get.theme.colorScheme.secondary,
-                                  decoration: TextDecoration.underline,
-                                  fontWeight: FontWeight.bold,
-                                  decorationThickness: 2,
-                                  fontSize: 18,
-                                ),
-                              ),
-                              onPressed: () => settingsController
-                                  .changeLanguageFromOnBoarding(),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                          ],
-                        )
-                      : const SizedBox(),
+                  _getLogo,
+                  if (!isBoarding) _onBoardingButtons(settingsController),
                 ],
               ),
             ),
@@ -125,4 +52,83 @@ class StartScreen extends StatelessWidget {
       ),
     );
   }
+
+  /// get On boarding buttons
+  Column _onBoardingButtons(SettingsController settingsController) => Column(
+        children: [
+          const SizedBox(
+            height: 200,
+          ),
+          MaterialButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40),
+            ),
+            color: Get.theme.colorScheme.secondary,
+            onPressed: () {
+              settingsController.onBoardingDone();
+              Get.off(
+                const HomeScreen(),
+                transition: Transition.fade,
+                duration: const Duration(seconds: 1),
+              );
+            },
+            child: Container(
+              width: 120,
+              padding: const EdgeInsets.all(15),
+              child: Text(
+                'start'.tr,
+                style: Get.textTheme.headline6!.copyWith(
+                  color: Get.theme.scaffoldBackgroundColor,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          MaterialButton(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40),
+            ),
+            color: Get.theme.scaffoldBackgroundColor.withOpacity(0.8),
+            child: Text(
+              '!language'.tr,
+              style: Get.textTheme.headline6!.copyWith(
+                color: Get.theme.colorScheme.secondary,
+                decoration: TextDecoration.underline,
+                fontWeight: FontWeight.bold,
+                decorationThickness: 2,
+                fontSize: 18,
+              ),
+            ),
+            onPressed: () => settingsController.changeLanguageFromOnBoarding(),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+        ],
+      );
+
+  /// get [StartScreen] Logo with text
+  Column get _getLogo => Column(
+        children: [
+          Image.asset(
+            'assets/images/icon.png',
+            width: 160,
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          SizedBox(
+            height: 70,
+            child: Text(
+              'onBoardingTitle'.tr,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Get.theme.colorScheme.secondary,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      );
 }

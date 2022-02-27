@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import 'package:nzakiapplication/utils/data/zakat_icons.dart';
+import '/utils/data/zakat_icons.dart';
 import '/widgets/widgets.dart';
 
 class ContactUs extends StatelessWidget {
@@ -11,10 +10,10 @@ class ContactUs extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child:Scaffold(
-        appBar: defaultAppBar(
+        appBar: DefaultAppBar(
           label: 'contactUs'.tr
         ),
-        body: backgroundContainer(
+        body: BackgroundContainer(
           child: SingleChildScrollView(
             child: Card(
               child: Container(
@@ -31,7 +30,7 @@ class ContactUs extends StatelessWidget {
                         ),
                         ListTile(
                           leading:Icon(Icons.mail,color: Get.theme.primaryColor,),
-                          title: const Text('amouraammarabderafik@gmail.com'),
+                          title: const Text('amoura.abderafik@univ-setif.dz'),
                         ),
                       ],
                     ),
