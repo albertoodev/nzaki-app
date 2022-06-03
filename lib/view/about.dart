@@ -28,6 +28,7 @@ class About extends StatelessWidget {
           child: Card(
             clipBehavior: Clip.hardEdge,
             child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: Container(
                   width: double.infinity,
                   alignment: Alignment.center,

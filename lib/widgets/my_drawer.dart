@@ -16,6 +16,7 @@ class MyDrawer extends Drawer {
             width: Get.width,
             color: Get.theme.primaryColor,
             child: ListView(
+              physics: const BouncingScrollPhysics(),
               children: [
                 Image.asset(
                   'assets/images/logo.png',

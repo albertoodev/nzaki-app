@@ -24,6 +24,7 @@ class CalculationScreen extends StatelessWidget {
         ),
         body: BackgroundContainer(
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
                 _zakatCalculatorCard(context: context),

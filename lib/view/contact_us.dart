@@ -15,6 +15,7 @@ class ContactUs extends StatelessWidget {
         ),
         body: BackgroundContainer(
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Card(
               child: Container(
                 padding:

@@ -15,6 +15,7 @@ class SettingsScreen extends StatelessWidget {
         appBar: DefaultAppBar(label: 'settings'.tr),
         body: BackgroundContainer(
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Card(
               child: Container(
                 padding:

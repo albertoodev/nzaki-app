@@ -37,6 +37,7 @@ class HomeScreen extends StatelessWidget {
         ),
         body: BackgroundContainer(
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: zakatTypes.map(

@@ -37,6 +37,7 @@ class StartScreen extends StatelessWidget {
           alignment: (isBoarding) ? Alignment.center : Alignment.bottomCenter,
           padding: const EdgeInsets.all(0),
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Column(
