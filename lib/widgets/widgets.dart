@@ -7,7 +7,7 @@ class DefaultAppBar extends AppBar {
           key: key,
           title: Text(
             label,
-            style: Get.textTheme.headline5!.apply(color: Colors.white),
+            style: Get.textTheme.headlineSmall!.apply(color: Colors.white),
           ),
           centerTitle: true,
         );

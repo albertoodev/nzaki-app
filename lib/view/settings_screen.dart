@@ -25,7 +25,7 @@ class SettingsScreen extends StatelessWidget {
                   children: [
                     Text(
                       'language'.tr,
-                      style: Get.theme.textTheme.headline6,
+                      style: Get.theme.textTheme.titleLarge,
                     ),
                     const Divider(
                       height: 15,
@@ -39,7 +39,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     Text(
                       'themeMode'.tr,
-                      style: Get.theme.textTheme.headline6,
+                      style: Get.theme.textTheme.titleLarge,
                     ),
                     const Divider(
                       height: 15,

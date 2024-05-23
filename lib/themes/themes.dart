@@ -15,6 +15,7 @@ final ThemeData lightTheme = ThemeData(
   scaffoldBackgroundColor: Colors.white,
   appBarTheme: const AppBarTheme(
     backgroundColor: Color(0xff1c2541),
+    iconTheme: IconThemeData(color: Colors.white),
   ),
   colorScheme:
       ColorScheme.fromSwatch().copyWith(secondary: const Color(0xff1c2541)),
@@ -30,12 +31,13 @@ final ThemeData darkTheme = ThemeData(
     ),
     color: Colors.white.withOpacity(0.8),
   ),
-  backgroundColor: const Color(0xff1c2541),
   primaryColor: const Color(0xff1c2541),
   scaffoldBackgroundColor: const Color(0xff1c2541),
   appBarTheme: const AppBarTheme(
     backgroundColor: Color(0xff0b132b),
+    iconTheme: IconThemeData(color: Colors.white),
   ),
   colorScheme: ColorScheme.fromSwatch()
-      .copyWith(secondary: Colors.white.withOpacity(0.8)),
+      .copyWith(secondary: Colors.white.withOpacity(0.8))
+      .copyWith(background: const Color(0xff1c2541)),
 );

@@ -76,7 +76,7 @@ class CalculationScreen extends StatelessWidget {
             children: [
               Text(
                 'result'.tr,
-                style: Get.theme.textTheme.headline6,
+                style: Get.theme.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
               const Divider(
@@ -86,7 +86,7 @@ class CalculationScreen extends StatelessWidget {
               GetX<CalculationController>(
                 builder: (controller) => Text(
                   controller.result.value,
-                  style: Get.theme.textTheme.headline5,
+                  style: Get.theme.textTheme.headlineSmall,
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -104,7 +104,7 @@ class CalculationScreen extends StatelessWidget {
             children: [
               Text(
                 'zakatCalculator'.tr,
-                style: Get.theme.textTheme.headline6,
+                style: Get.theme.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
               const Divider(

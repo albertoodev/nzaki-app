@@ -40,9 +40,11 @@ class HomeScreen extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: zakatTypes.map(
-                _zakatTypeElement,
-                ).toList(),
+              children: zakatTypes
+                  .map(
+                    _zakatTypeElement,
+                  )
+                  .toList(),
             ),
           ),
         ),
@@ -51,38 +53,37 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-    /// get [Card] of zakat type element
-    Widget _zakatTypeElement (ZakatType element) =>Card(
-      margin: const EdgeInsets.all(4.0)
-          .add(const EdgeInsets.only(bottom: 30.0)),
-      child: ListTile(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(40),
-        ),
-        onTap: () => Get.to(
-          CalculationScreen(
-            id: element.id,
+  /// get [Card] of zakat type element
+  Widget _zakatTypeElement(ZakatType element) => Card(
+        margin:
+            const EdgeInsets.all(4.0).add(const EdgeInsets.only(bottom: 30.0)),
+        child: ListTile(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(40),
           ),
-          transition: Transition.rightToLeftWithFade,
-          curve: Curves.easeInOutQuint,
+          onTap: () => Get.to(
+            CalculationScreen(
+              id: element.id,
+            ),
+            transition: Transition.rightToLeftWithFade,
+            curve: Curves.easeInOutQuint,
+          ),
+          visualDensity: VisualDensity.standard,
+          leading: Icon(
+            element.icon,
+            color: Get.theme.primaryColor,
+            size: (element.id == 1) ? 28 : 23,
+          ),
+          trailing: Icon(
+            Icons.arrow_forward_ios,
+            color: Get.theme.primaryColor,
+          ),
+          title: Text(
+            'name${element.id}'.tr,
+            textAlign: TextAlign.center,
+            style: Get.textTheme.titleLarge!.copyWith(
+                fontWeight: FontWeight.bold, color: Get.theme.primaryColor),
+          ),
         ),
-        visualDensity: VisualDensity.standard,
-        leading: Icon(
-          element.icon,
-          color: Get.theme.primaryColor,
-          size: (element.id == 1) ? 28 : 23,
-        ),
-        trailing: Icon(
-          Icons.arrow_forward_ios,
-          color: Get.theme.primaryColor,
-        ),
-        title: Text(
-          'name${element.id}'.tr,
-          textAlign: TextAlign.center,
-          style: Get.textTheme.headline6!.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Get.theme.primaryColor),
-        ),
-      ),
-    );
+      );
 }

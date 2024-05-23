@@ -9,7 +9,8 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SettingsController settingsController = Get.find<SettingsController>();
+    final SettingsController settingsController =
+        Get.find<SettingsController>();
     bool isBoarding = settingsController.isOnBoarding;
     if (isBoarding) {
       Timer(
@@ -78,7 +79,7 @@ class StartScreen extends StatelessWidget {
               padding: const EdgeInsets.all(15),
               child: Text(
                 'start'.tr,
-                style: Get.textTheme.headline6!.copyWith(
+                style: Get.textTheme.titleLarge!.copyWith(
                   color: Get.theme.scaffoldBackgroundColor,
                 ),
                 textAlign: TextAlign.center,
@@ -93,7 +94,7 @@ class StartScreen extends StatelessWidget {
             color: Get.theme.scaffoldBackgroundColor.withOpacity(0.8),
             child: Text(
               '!language'.tr,
-              style: Get.textTheme.headline6!.copyWith(
+              style: Get.textTheme.titleLarge!.copyWith(
                 color: Get.theme.colorScheme.secondary,
                 decoration: TextDecoration.underline,
                 fontWeight: FontWeight.bold,
