@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:nzakiapplication/view/start_screen.dart';
 import '/utils/data/global_data.dart';
 
 class SettingsController extends GetxController {
