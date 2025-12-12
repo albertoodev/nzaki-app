@@ -1,16 +1,53 @@
-# nzaki_app_new
+# Nzaki App
 
-A new Flutter project.
+##### A Zakat Calculation App built with Flutter.
+
+This application was developed as a second-year university project. It is designed to help Muslims calculate and manage their Zakat, a religious obligation in Islam, with a clean and user-friendly interface.
+
+## Screenshots
+
+| Screen | Light Mode ️ | Dark Mode  |
+|:---:|:---:|:---:|
+| **Home** | <img src="assets/screenshots/home-light.png" width="200" /> | <img src="assets/screenshots/home-dark.png" width="200" /> |
+| **Calculation** | <img src="assets/screenshots/calc-light.png" width="200" /> | <img src="assets/screenshots/calc-dark.png" width="200" /> |
+| **Settings** | <img src="assets/screenshots/settings-light.png" width="200" /> | <img src="assets/screenshots/settings-dark.png" width="200" /> |
+
+
+## Features
+
+- **Zakat Calculator:** Calculate Zakat based on different asset types (Cattle, Farm Produce, Gold/Silver, Money).
+- **Educational Resources:** Information and Quranic Ayats about Zakat.
+- **Multi-language Support:** Fully supports **English** and **Arabic**.
+- **Theme Support:** Supports **Dark Mode**, **Light Mode**, and System Default.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To get started with this application, you will need the following software installed on your machine:
 
-A few resources to get you started if this is your first Flutter project:
+- [Flutter SDK](https://docs.flutter.dev/get-started/install)
+- Android Studio or VSCode
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1.  **Clone the repository:**
+    ```sh
+    git clone https://github.com/albertoodev/nzaki-app.git
+    ```
+    *(Or download the ZIP file)*
+
+2.  **Open the project** in Android Studio or VSCode.
+
+3.  **Install dependencies:**
+    ```sh
+    flutter pub get
+    ```
+
+## Usage
+
+To run the application on a connected device or emulator:
+```sh
+flutter run
+```
+
+## Contributing
+Contributions are welcome! Please submit any bug reports, feature requests, or pull requests through the Github repository.
